@@ -15,7 +15,7 @@ import os
 LABELS = ["Cachorros", "Cavalos", "Galinhas", "Gatos", "Vacas"]  # Ajuste as classes conforme necessário
 
 # Caminho absoluto do modelo
-model_path = os.path.join(os.path.dirname(__file__), "modelo_treinado.h5")
+model_path = os.path.join(os.path.dirname(__file__), "IC_Project_Fase3_Simple_SaveModel.h5")
 
 # Carregar o modelo
 @st.cache_resource
