@@ -54,7 +54,7 @@ uploaded_file = st.file_uploader("Escolha uma imagem", type=["jpg", "png", "jpeg
 if uploaded_file is not None:
     model = load_trained_model()
     if model is not None:
-        image_array = preprocess_image(uploaded_file, target_size=(256, 256))
+        image_array = preprocess_image(uploaded_file, target_size=(224, 224))
         if image_array is not None:
             predicted_class, confidence = predict_class(image_array, model)
             st.image(uploaded_file, caption="Imagem carregada", use_column_width=True)
