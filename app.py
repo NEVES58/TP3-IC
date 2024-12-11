@@ -11,14 +11,10 @@ import numpy as np
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
 
-# Caminho para o modelo salvo
-MODEL_PATH = "modelo_treinado.h5"
 LABELS = ["Cachorros", "Cavalos", "Galinhas", "Gatos", "Vacas"]  # Ajuste as classes conforme necessário
 
 # Carregar o modelo
 @st.cache_resource
-def load_model_from_file(model_path):
-    return load_model(model_path)
 
 # Pré-processamento da imagem
 def preprocess_image(uploaded_file, target_size):
@@ -45,7 +41,7 @@ st.write("Carregue uma imagem para identificar a classe correspondente.")
 uploaded_file = st.file_uploader("Escolha uma imagem", type=["jpg", "png", "jpeg"])
 
 if uploaded_file is not None:
-    model = load_model_from_file(MODEL_PATH)
+    model = load_model("modelo_treinado.h5")
     image_array = preprocess_image(uploaded_file, target_size=(256, 256))
     if image_array is not None:
         predicted_class, confidence = predict_class(image_array, model)
