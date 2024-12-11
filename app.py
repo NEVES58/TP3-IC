@@ -14,8 +14,18 @@ import os
 
 LABELS = ["Cachorros", "Cavalos", "Galinhas", "Gatos", "Vacas"]  # Ajuste as classes conforme necessário
 
+# Caminho absoluto do modelo
+model_path = os.path.join(os.path.dirname(__file__), "modelo_treinado.h5")
+
 # Carregar o modelo
 @st.cache_resource
+def load_trained_model():
+    try:
+        model = load_model(model_path)
+        return model
+    except Exception as e:
+        st.error(f"Erro ao carregar o modelo: {e}")
+        return None
 
 # Pré-processamento da imagem
 def preprocess_image(uploaded_file, target_size):
@@ -42,11 +52,11 @@ st.write("Carregue uma imagem para identificar a classe correspondente.")
 uploaded_file = st.file_uploader("Escolha uma imagem", type=["jpg", "png", "jpeg"])
 
 if uploaded_file is not None:
-    model = load_model("TP3-IC/modelo_treinado.h5")
-    image_array = preprocess_image(uploaded_file, target_size=(256, 256))
-    if image_array is not None:
-        predicted_class, confidence = predict_class(image_array, model)
-        st.image(uploaded_file, caption=f"Imagem carregada", use_column_width=True)
-        st.write(f"Classe prevista: **{LABELS[predicted_class]}**")
-        st.write(f"Confiança: **{confidence * 100:.2f}%**")
-
+    model = load_trained_model()
+    if model is not None:
+        image_array = preprocess_image(uploaded_file, target_size=(256, 256))
+        if image_array is not None:
+            predicted_class, confidence = predict_class(image_array, model)
+            st.image(uploaded_file, caption="Imagem carregada", use_column_width=True)
+            st.write(f"Classe prevista: **{LABELS[predicted_class]}**")
+            st.write(f"Confiança: **{confidence * 100:.2f}%**")
