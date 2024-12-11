@@ -14,14 +14,13 @@ import os
 
 LABELS = ["Cachorros", "Cavalos", "Galinhas", "Gatos", "Vacas"]  # Ajuste as classes conforme necessário
 
-# Caminho absoluto do modelo
-model_path = os.path.join(os.path.dirname(__file__), "IC_Project_Fase3_Simple_SaveModel.h5")
+
 
 # Carregar o modelo
 @st.cache_resource
 def load_trained_model():
     try:
-        model = load_model(model_path)
+        model = load_model("IC_Project_Fase3_Simple_SaveModel.h5")
         return model
     except Exception as e:
         st.error(f"Erro ao carregar o modelo: {e}")
