@@ -10,6 +10,7 @@ import streamlit as st
 import numpy as np
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
+import os
 
 LABELS = ["Cachorros", "Cavalos", "Galinhas", "Gatos", "Vacas"]  # Ajuste as classes conforme necessário
 
