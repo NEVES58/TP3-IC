@@ -41,7 +41,7 @@ st.write("Carregue uma imagem para identificar a classe correspondente.")
 uploaded_file = st.file_uploader("Escolha uma imagem", type=["jpg", "png", "jpeg"])
 
 if uploaded_file is not None:
-    model = load_model("modelo_treinado.h5")
+    model = load_model("TP3-IC/modelo_treinado.h5")
     image_array = preprocess_image(uploaded_file, target_size=(256, 256))
     if image_array is not None:
         predicted_class, confidence = predict_class(image_array, model)
